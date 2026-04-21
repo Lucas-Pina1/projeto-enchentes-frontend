@@ -3,7 +3,7 @@
 Este repositório contém a interface de usuário (Front-end) do sistema "Projeto Enchentes: Gerenciador de Abrigos". 
 Criado para ser um **MVP rápido, limpo e direto**, construído utilizando React.js e estilizado com Tailwind CSS para garantir acessibilidade e clariadade em um momento de crise.
 
-**Repositório do Back-end:** [LINK_DO_REPOSITORIO_BACKEND]
+**Repositório do Back-end:** [https://github.com/Lucas-Pina1/projeto-enchentes-backend]
 
 
 ## Como funciona?
@@ -42,4 +42,4 @@ Abra o seu navegador (Normalmente a aplicação ficará disponível em `http://l
 ---
 
 **Tecnologias Utilizadas:** React, Vite, Tailwind CSS v3 e Lucide React Icons.
-# projeto-enchentes-frontend
+
