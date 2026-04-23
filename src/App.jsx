@@ -47,6 +47,23 @@ function App() {
     fetchAbrigos();
   }, []);
 
+  const handleContatoChange = (e) => {
+    let v = e.target.value.replace(/\D/g, "");
+    if (v.length > 11) v = v.substring(0, 11);
+
+    if (v.length <= 2) {
+      // just digits
+    } else if (v.length <= 6) {
+      v = `(${v.substring(0, 2)}) ${v.substring(2)}`;
+    } else if (v.length <= 10) {
+      v = `(${v.substring(0, 2)}) ${v.substring(2, 6)}-${v.substring(6)}`;
+    } else {
+      v = `(${v.substring(0, 2)}) ${v.substring(2, 7)}-${v.substring(7)}`;
+    }
+    
+    setForm({ ...form, contato: v });
+  };
+
   // Lógica de Cadastro no Back-end
   const handleCadastrar = (e) => {
     e.preventDefault();
@@ -54,6 +71,12 @@ function App() {
     // Validação extra de Front-end para garantir que nada passe
     if (!form.nome || !form.estado || !form.cidade || !form.endereco || !form.contato || !form.capacidade) {
       alert("Validação: Todos os campos são obrigatórios! Preencha todas as informações.");
+      return;
+    }
+
+    const contatoRegex = /^\(?[1-9]{2}\)? ?(?:[2-8]|9[0-9])[0-9]{3}\-?[0-9]{4}$/;
+    if (!contatoRegex.test(form.contato)) {
+      alert("Validação: O contato deve ser um número de telefone válido com DDD (ex: 11999999999 ou (11) 99999-9999).");
       return;
     }
 
@@ -82,7 +105,11 @@ function App() {
     .then(async (res) => {
       if (!res.ok) {
         const errorData = await res.json();
-        throw new Error(errorData.error || 'Erro desconhecido');
+        let errorMessage = errorData.error || 'Erro desconhecido';
+        if (errorData.details && Array.isArray(errorData.details)) {
+          errorMessage += '\n\nDetalhes:\n- ' + errorData.details.join('\n- ');
+        }
+        throw new Error(errorMessage);
       }
       return res.json();
     })
@@ -175,7 +202,7 @@ function App() {
 
               <div>
                 <label className="block text-sm font-semibold text-slate-600 mb-1">Telefone/Contato do Abrigo <span className="text-red-500">*</span></label>
-                <input required type="text" value={form.contato} onChange={e => setForm({...form, contato: e.target.value})} className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Ex: (51) 99999-9999" />
+                <input required type="text" maxLength="15" value={form.contato} onChange={handleContatoChange} className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="Ex: (51) 99999-9999" />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
