@@ -1,45 +1,53 @@
-# Projeto Enchentes - Front-End (Conexão e Visualização)
+# Projeto Enchentes - Interface de Usuário (Front-end)
 
-Este repositório contém a interface de usuário (Front-end) do sistema "Projeto Enchentes: Gerenciador de Abrigos". 
-Criado para ser um **MVP rápido, limpo e direto**, construído utilizando React.js e estilizado com Tailwind CSS para garantir acessibilidade e clariadade em um momento de crise.
+🔗 **Link do Projeto em Produção:** `[COLE SEU LINK DA VERCEL AQUI]`
 
-**Repositório do Back-end:** [https://github.com/Lucas-Pina1/projeto-enchentes-backend]
+## 1 - Sobre o Projeto
 
+Este repositório contém o Front-end do sistema "Projeto Enchentes: Gerenciador de Abrigos". Criado para ser um **MVP rápido, limpo e direto**, foi construído utilizando **React.js** com **Vite** e estilizado com **Tailwind CSS** para garantir acessibilidade, responsividade e clareza visual em momentos de crise.
 
-## Como funciona?
+**Repositório do Back-end:** [https://github.com/Lucas-Pina1/projeto-enchentes-backend]  
+**API Integrada em Produção:** `https://projeto-enchentes-backend.onrender.com`
 
-O MVP se conecta diretamente à API do nosso servidor Node.js (PostgreSQL) para consumir as informações dos abrigos atualizados instantaneamente.
+## 2 - O Que Foi Feito (Atualizações Recentes)
 
-### Funcionalidades do MVP:
-- **Painel Dinâmico**: Os abrigos são listados em formato de cards.
-- **Identificação Visual**: 
-  - Cor Verde para indicar que há disponibilidade de vagas.
-  - Cor Vermelha para destacar que o abrigo está lotado.
-  - Barra de Progresso demonstrando quantas pessoas já estão ocupando do total da capacidade máxima daquele local.
-- **Filtro Avançado**: Busca instantânea que permite qualquer pessoa rapidamente filtrar a lista de dezenas de abrigos apenas pela sua **Cidade** ou **Estado**. 
+- **Integração Dinâmica com API:** O sistema foi refatorado para utilizar Variáveis de Ambiente (`VITE_API_URL`), permitindo a alternância automática entre o ambiente de desenvolvimento local e a API oficial hospedada no Render.
+- **Deploy Otimizado na Vercel:** Projeto preparado para entrega contínua (CI/CD) na Vercel.
+- **Melhorias de UX e Validação de Dados:**
+  - Adição de máscara em tempo real para o campo de telefone/contato no momento do cadastro.
+  - Implementação de alertas amigáveis que processam e exibem os erros retornados pela API (como lotação excedente ou regras de negócio quebradas).
+  - Feedback visual de carregamento (`spinners`) durante as buscas.
+- **Renderização Dinâmica:** Atualização instantânea do painel de abrigos logo após um novo cadastro bem-sucedido.
 
-## Como Rodar o Projeto
+## 3 - Funcionalidades Principais
 
-Caso você tenha clonado o repositório, siga o passo a passo abaixo para rodar o Front-end localmente:
+- **Visualização de Abrigos:** Cards interativos detalhando localização, contato, e status em tempo real. Inclui barra de progresso visual de ocupação e cores indicativas (Verde = Disponível, Vermelho = Lotado).
+- **Cadastro Ágil:** Formulário de uma página para que voluntários registrem novos locais com máxima agilidade e sem burocracia.
+- **Filtros Avançados:** Busca local por Estado (UF) e Cidade, entregando apenas as informações relevantes para a região de quem pesquisa.
 
-### 1) Preparação do Backend
-O Front-end consome informações em tempo real do nosso banco de dados. 
-Certifique-se de que o repositório do **back-end** (`projeto-enchentes-backend`) foi baixado, configurado com o banco e está rodando na sua máquina (Geralmente respondendo em `http://localhost:3000`).
+## 4 - Como Rodar o Projeto Localmente
 
-### 2) Inicializando o Frontend
-Abra o terminal nesta pasta do frontend (`projeto-enchentes-frontend`) e instale as dependências exigidas pelo React/Vite:
-```bash
-npm install
-```
+### Pré-requisito
+Certifique-se de ter o Back-end rodando na sua máquina (na porta 3000) ou tenha uma `External Database URL` do Render configurada.
 
-Em seguida, basta inicializar a aplicação disparando o servidor com Vite:
-```bash
-npm run dev
-```
+### Inicializando o Frontend
+1. **Abra o terminal na pasta e instale as dependências:**
+   ```bash
+   npm install
+   ```
 
-Abra o seu navegador (Normalmente a aplicação ficará disponível em `http://localhost:5173`).
+2. **Configure a Variável de Ambiente:**
+   - Crie um arquivo `.env` na raiz do projeto (opcional para rodar localmente, pois o sistema fará fallback automático para a porta 3000):
+     ```env
+     VITE_API_URL=http://localhost:3000
+     ```
+
+3. **Inicie o Servidor Vite:**
+   ```bash
+   npm run dev
+   ```
+
+Abra o seu navegador na URL gerada (Normalmente `http://localhost:5173`).
 
 ---
-
-**Tecnologias Utilizadas:** React, Vite, Tailwind CSS v3 e Lucide React Icons.
-
+**Tecnologias Utilizadas:** React.js, Vite, Tailwind CSS v3 e Lucide React Icons.
