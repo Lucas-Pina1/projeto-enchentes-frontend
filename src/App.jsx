@@ -8,6 +8,7 @@ const ESTADOS_BR = [
 ];
 
 function App() {
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
   const [view, setView] = useState('list'); // 'list' ou 'create'
   
   // Listagem
@@ -31,7 +32,7 @@ function App() {
   // Busca os abrigos na API do back-end
   const fetchAbrigos = () => {
     setLoading(true);
-    fetch('http://localhost:3000/abrigos')
+    fetch(`${API_URL}/abrigos`)
       .then(response => response.json())
       .then(data => {
         setAbrigos(data);
@@ -97,7 +98,7 @@ function App() {
       status: oc >= cap ? 'Lotado' : 'Disponivel'
     };
 
-    fetch('http://localhost:3000/abrigos', {
+    fetch(`${API_URL}/abrigos`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
